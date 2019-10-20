@@ -1,0 +1,141 @@
+import java.util.Formatter;
+import java.lang.System;
+import java.lang.String;
+import java.util.Scanner;
+import java.io.*;
+
+
+class FileOperations
+{
+
+
+
+	BufferedReader br;
+
+		String name;
+		int age;
+		float salary;
+
+
+	FileOperations()
+	{
+		 br=new BufferedReader(new InputStreamReader(System.in));
+
+	}
+
+	void readFile()
+	{
+
+		
+
+
+
+		try
+		{
+
+			File fl=new File("abcd.txt");
+
+			if(!fl.exists())
+			{
+
+				System.out.println("File doen't exist");
+
+				System.out.println("Creating a File abcd.txt");
+
+
+				Formatter fm=new Formatter("abcd.txt");
+
+
+				writeFile(fm);
+
+				System.out.println("File created successfully and data is recorded");
+
+				
+			}
+
+				
+
+
+				System.out.println("Reading from the file");
+
+				Scanner sc=new Scanner(fl);
+
+				/*while(fl.hasNext())
+				{
+					System.out.println(sc.nextInt()+ " "+sc.nextString()+" "+sc.nextFloat());
+						
+
+				}*/
+
+	
+				
+		}
+		
+		catch(Exception e)
+		{
+			System.out.println("Some error occured");
+
+		}
+
+		
+
+	}
+
+
+	void writeFile(Formatter x)
+	{
+
+
+			try
+			{
+
+				for(int i=0;i<3;i++)
+				{
+					System.out.println("Enter age, name,salary of employee "+(i+1));
+					age=Integer.parseInt(br.readLine());
+					name=br.readLine();
+					salary=Float.parseFloat(br.readLine());
+					
+
+
+					x.format("%d%s%f",age,name,salary);
+					//x.println();
+
+				}
+
+
+				x.close();
+				
+		
+			}
+
+
+			catch(Exception e)
+			{
+				System.out.println("Error !");
+			}
+
+		
+
+	}
+
+	
+}
+
+
+
+class FileDemo
+{
+
+	public static void main(String args[]) 
+	{
+
+		FileOperations fop=new FileOperations();
+
+		fop.readFile();		
+
+	}
+
+
+
+}

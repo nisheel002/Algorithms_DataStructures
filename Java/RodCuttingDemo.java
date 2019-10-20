@@ -1,0 +1,71 @@
+
+import java.io.*;
+
+class RodCutting
+{
+
+	int rodCost[]={0,1,5,8,9,10,17,17,20,24,30};
+	
+	int optimalCost[];
+
+	void initialize(int length )
+	{
+		int i;
+		optimalCost=new int[length+1];
+
+		for(i=2;i<length;i++)
+			optimalCost[i]=-1;
+		
+		optimalCost[0]=0;
+		optimalCost[1]=rodCost[1];
+	}
+
+	int findOptimalCost(int size)
+	{
+
+		int t,i;
+
+		if(optimalCost[size]>-1)
+			return optimalCost[size];
+
+		int max=rodCost[size];
+
+		for(i=1;i<size;i++)
+		{
+			t=findOptimalCost(i)+findOptimalCost(size-i);
+			
+
+			if(t>max)
+				max=t;
+		}
+
+		 optimalCost[size]=max;
+
+		 return max;
+	}
+
+
+}
+
+class RodCuttingDemo
+{
+
+	public static void main(String args[]) throws IOException
+	{
+		
+		int length;
+
+		BufferedReader br=new BufferedReader(new InputStreamReader(System.in));
+
+		RodCutting rc=new RodCutting();
+
+		length=Integer.parseInt(br.readLine().trim());
+		rc.initialize(length);
+		int oc=rc.findOptimalCost(length);
+
+		System.out.println("optimal cost="+oc);
+		
+
+	}
+
+}
